@@ -37,7 +37,7 @@ if (process.env.NODE_ENV === "production") {
   //route handlers including the one directly above in this if statement
   const path = require("path");
   app.get("*", (req, res) => {
-    res.sendFile(path.resole(__dirname, "client", "build", "index.html"));
+    res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
   });
 }
 
