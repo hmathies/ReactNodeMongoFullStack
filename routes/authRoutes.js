@@ -9,11 +9,17 @@ module.exports = app => {
     })
   );
   //below is what google  oauth sends back to the server after a user has attempted to login
-  app.get("/auth/google/callback", passport.authenticate("google"));
+  app.get(
+    "/auth/google/callback",
+    passport.authenticate("google"),
+    (req, res) => {
+      res.redirect("/surveys");
+    }
+  );
 
   app.get("/api/logout", (req, res) => {
     req.logout();
-    res.send(req.user);
+    res.redirect("/");
   });
   //the request sent to route handler, extracts cookie data, pulls user id out of cookie data, turns user
   //id into a user, User model instance added to req object as 'req.user'
