@@ -13,7 +13,8 @@ export const fetchUser = () => async dispatch => {
   dispatch({ type: FETCH_USER, payload: res.data });
 };
 
-//below is axios call with traditional promise
+{
+  /*//below is axios call with traditional promise
 // export const fetchUser = () => {
 //   return function(dispatch) {
 //     axios
@@ -21,3 +22,5 @@ export const fetchUser = () => async dispatch => {
 //       .then(res => dispatch({ type: FETCH_USER, payload: res }));
 //   };
 // };
+*/
+}

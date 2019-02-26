@@ -6,6 +6,7 @@ const keys = require("./config/keys");
 //express middleware which is wired up using app.use
 const bodyParser = require("body-parser");
 require("./models/user");
+require("./models/Survey");
 require("./services/passport");
 
 mongoose.connect(keys.mongoURI);
@@ -26,6 +27,7 @@ app.use(passport.session());
 //below essentially turns the files into a function and immediately calls our express app
 require("./routes/authRoutes")(app);
 require("./routes/billingRoutes")(app);
+require("./routes/surveyRoutes")(app);
 
 // when deployed to production, the create-react-app server doesn't exists and the express
 // server handles all of the routing so we need to tell it what to do with the react routes and files
