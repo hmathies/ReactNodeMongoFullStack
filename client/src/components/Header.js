@@ -2,8 +2,11 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import Payments from "./Payments";
+import Particles from 'react-particles-js';
+import ParticleComponent from './ParticleComponent';
 
 class Header extends Component {
+
   renderContent() {
     switch ( this.props.auth ) {
       case null:
@@ -30,7 +33,8 @@ class Header extends Component {
   }
   render() {
     return ( <nav>
-      <div className="nav-wrapper">
+
+      <div className="nav-wrapper teal darken-4">
         <Link to={this.props.auth
             ? "/surveys"
             : "/"} className="left brand-logo">
@@ -38,6 +42,7 @@ class Header extends Component {
         </Link>
         <ul className="right">{this.renderContent()}</ul>
       </div>
+
     </nav> );
   }
 }
