@@ -14,18 +14,36 @@ module.exports = app => {
   app.get("/api/surveys/thanks", (req, res) => {
     res.send("Thanks for voting!");
   });
+
   app.post('/api/surveys/webhooks', (req, res) => {
-    const events = _.map(req.body, ({email, url}) => {
-      const pathname = new URL(url).pathname;
-      const path = new Path('/api/surveys/:surveyId/:choice');
-      const match = path.test(pathname);
-      if (match) {
-        return {email, surveyId: match.surveyId, choice: match.choice};
-      }
-    });
-    const compactEvents = _.compact(events);
-    const uniqueEvents = _.uniqBy(compactEvents, 'email', 'surveyId');
-    console.log(uniqueEvents)
+    const path = new Path('/api/surveys/:surveyId/:choice');
+    _.chain(req.body)
+        .map(({email, url}) => {
+          const match = path.test(new URL(url).pathname);
+          if (match) {
+            return {email, surveyId: match.surveyId, choice: match.choice};
+          }
+        })
+         .compact()
+         .uniqBy( 'email', 'surveyId')
+         .each(({ surveyId, email, choice }) => {
+           // having mongo handle the query not node
+           Survey.updateOne({
+             _id: surveyId,
+             recipients: {
+               $elemMatch: { email: email, responded: false }
+             }
+           }, {
+            //[choice] will always equal 'yes' || 'no'
+           // increment either 'yes' or 'no' by 1
+             $inc: { [choice]: 1},
+             // find the recipient that matches and update their responded property. $ is the matched recipient
+             $set: { 'recipients.$.responded': true}
+           }).exec();//have to call in to actually execute the query
+         })
+         .value();
+
+        res.send({})
   });
 
   app.post("/api/surveys", requireLogin, requireCredits, async (req, res) => {
