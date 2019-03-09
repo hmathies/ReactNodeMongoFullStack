@@ -11,7 +11,7 @@ const Survey = mongoose.model("surveys");
 
 module.exports = app => {
   //use 4242 4242 4242 4242 as the card number
-  app.get("/api/surveys/thanks", (req, res) => {
+  app.get("/api/surveys/:surveyId/:choice", (req, res) => {
     res.send("Thanks for voting!");
   });
 
@@ -38,7 +38,8 @@ module.exports = app => {
            // increment either 'yes' or 'no' by 1
              $inc: { [choice]: 1},
              // find the recipient that matches and update their responded property. $ is the matched recipient
-             $set: { 'recipients.$.responded': true}
+             $set: { 'recipients.$.responded': true},
+             lastResponded: new Date()
            }).exec();//have to call in to actually execute the query
          })
          .value();
