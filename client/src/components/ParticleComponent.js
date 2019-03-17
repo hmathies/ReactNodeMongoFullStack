@@ -6,8 +6,9 @@ export default () => (
     style={{
       position: "fixed",
       top: 0,
-      left: 0,
-      width: "100%",
+      left: "10%",
+      right: "25%",
+      width: "70%",
       height: "5%"
     }}
   >
@@ -68,7 +69,7 @@ export default () => (
     },
     "move": {
       "enable": true,
-      "speed": 6,
+      "speed": 2,
       "direction": "none",
       "random": false,
       "straight": false,

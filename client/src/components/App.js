@@ -7,7 +7,6 @@ import Header from "./Header";
 import Landing from "./Landing";
 import Dashboard from "./Dashboard";
 import SurveyNew from "./surveys/SurveyNew";
-import ParticleComponent from './ParticleComponent';
 
 class App extends Component {
   componentDidMount() {
@@ -23,7 +22,9 @@ class App extends Component {
           <BrowserRouter>
 
             <div>
+
               <Header/>
+
               <div className="container">
               <Route exact={true} path="/" component={Landing}/>
               <Route exact={true} path="/surveys" component={Dashboard}/>
