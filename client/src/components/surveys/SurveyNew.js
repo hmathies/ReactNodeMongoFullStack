@@ -8,21 +8,29 @@ class SurveyNew extends Component {
   //the below state code is equivalent to writing out the constructor code
   state = {
     showFormReview: false
-  }
+  };
 
   renderContent() {
     if ( this.state.showFormReview ) {
-      return <SurveyFormReview
+      return (
+      <SurveyFormReview
         onCancel={() => this.setState({showFormReview: false})}
         />
+      )
     }
-    return <SurveyForm onSurveySubmit={() => this.setState( { showFormReview: true } )}/>
+    return (
+      <SurveyForm
+        onSurveySubmit={() => this.setState( { showFormReview: true } )}
+        />
+    );
   }
 
   render() {
-    return ( <div>
+    return (
+      <div>
       {this.renderContent()}
-    </div> );
+    </div>
+    );
   }
 }
 // using reduxForm below so that when a user navigates away from

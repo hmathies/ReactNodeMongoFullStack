@@ -17,18 +17,22 @@ class App extends Component {
   }
 
   render() {
-    return ( <BrowserRouter>
-      <div>
-        <Header/>
+    return (
+        <div>
 
-        <div className="container">
+          <BrowserRouter>
 
-          <Route exact={true} path="/" component={Landing}/>
-          <Route exact={true} path="/surveys" component={Dashboard}/>
-          <Route path="/surveys/new" component={SurveyNew}/>
+            <div>
+              <Header/>
+              <div className="container">
+              <Route exact={true} path="/" component={Landing}/>
+              <Route exact={true} path="/surveys" component={Dashboard}/>
+              <Route path="/surveys/new" component={SurveyNew}/>
+              </div>
+            </div>
+          </BrowserRouter>
         </div>
-      </div>
-    </BrowserRouter> );
+     );
   }
 }
 
