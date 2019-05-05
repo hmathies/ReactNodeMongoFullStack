@@ -7,34 +7,33 @@ import Header from "./Header";
 import Landing from "./Landing";
 import Dashboard from "./Dashboard";
 import SurveyNew from "./surveys/SurveyNew";
+import "../App.css";
 
 class App extends Component {
   componentDidMount() {
-    this
-      .props
-      .fetchUser();
+    this.props.fetchUser();
   }
 
   render() {
     return (
-        <div>
+      <div>
+        <BrowserRouter>
+          <div>
+            <Header />
 
-          <BrowserRouter>
-
-            <div>
-
-              <Header/>
-
-              <div className="container">
-              <Route exact={true} path="/" component={Landing}/>
-              <Route exact={true} path="/surveys" component={Dashboard}/>
-              <Route path="/surveys/new" component={SurveyNew}/>
-              </div>
+            <div className="container">
+              <Route exact={true} path="/" component={Landing} />
+              <Route exact={true} path="/surveys" component={Dashboard} />
+              <Route path="/surveys/new" component={SurveyNew} />
             </div>
-          </BrowserRouter>
-        </div>
-     );
+          </div>
+        </BrowserRouter>
+      </div>
+    );
   }
 }
 
-export default connect( null, actions )( App );
+export default connect(
+  null,
+  actions
+)(App);

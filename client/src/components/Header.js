@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import Payments from "./Payments";
-import ParticleComponent from './ParticleComponent';
+import ParticleComponent from "./ParticleComponent";
 
 class Header extends Component {
   constructor(props) {
@@ -27,21 +27,22 @@ class Header extends Component {
   }
 
   renderContent() {
-    switch ( this.props.auth ) {
+    switch (this.props.auth) {
       case null:
         return;
       case false:
-        return ( <li>
-          <a href="/auth/google">Login With Google</a>
-        </li> );
+        return (
+          <li>
+            <a href="/auth/google">Login With Google</a>
+          </li>
+        );
       default:
         return [
-
-          <li key="3" style={{marginRight:"10px"}}>
+          <li key="3" style={{ marginRight: "10px" }}>
             Credits: {this.props.auth.credits}
           </li>,
           <li key="1">
-            <Payments/>
+            <Payments />
           </li>,
           <li key="2">
             <a href="/api/logout">Logout</a>
@@ -51,27 +52,33 @@ class Header extends Component {
   }
   render() {
     const isDesktop = this.state.isDesktop;
-    return ( <nav style={{minHeight: "100px"}}>
-
-      <div className="nav-wrapper teal darken-4" style={{fontFamily: 'Montserrat Alternates'}}>
-        {isDesktop ? (
+    return (
+      <nav style={{ minHeight: "100px" }}>
+        <div
+          className="nav-wrapper teal darken-4"
+          style={{ fontFamily: "Montserrat Alternates" }}
+        >
+          {/* {isDesktop ? (
           <ParticleComponent />
-        ): ""}
+        ): ""} */}
 
-        <Link to={this.props.auth
-            ? "/surveys"
-            : "/"} className="left brand-logo">
-          Emaily
-        </Link>
+          <Link
+            to={this.props.auth ? "/surveys" : "/"}
+            className="left brand-logo"
+          >
+            Emaily
+          </Link>
 
-        <ul className="right" style={{padding:"10px"}}>{this.renderContent()}</ul>
-      </div>
-
-    </nav> );
+          <ul className="right" style={{ padding: "10px" }}>
+            {this.renderContent()}
+          </ul>
+        </div>
+      </nav>
+    );
   }
 }
-function mapStateToProps( { auth } ) {
+function mapStateToProps({ auth }) {
   return { auth };
 }
 
-export default connect( mapStateToProps )( Header );
+export default connect(mapStateToProps)(Header);
